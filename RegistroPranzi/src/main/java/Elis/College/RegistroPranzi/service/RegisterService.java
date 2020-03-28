@@ -20,7 +20,8 @@ public class RegisterService {
     //get prenotations by userId
     public List<Register> getAllByUser_id(Long userId){
         System.out.println("SERVICE : userId: "+userId);
-        return registerRepository.getAllByUser_id(userId);
+        return registerRepository.findAllByUser_Id(userId);
+
     }
 
     //get prenotations by date

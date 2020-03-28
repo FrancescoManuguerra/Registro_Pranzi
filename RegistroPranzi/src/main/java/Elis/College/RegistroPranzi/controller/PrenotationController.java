@@ -19,11 +19,12 @@ public class PrenotationController {
     @Autowired
     RegisterService registerService;
 
+    //TODO doesn't work
     //get prenotations by id
     @CrossOrigin
     @GetMapping(value = "/prenotations/{userId}")
     public ResponseEntity<List<Register>> getAllByUser_id(@PathVariable(name = "userId", required = true) Long userId) throws InputParameterException {
-        System.out.println("CONtroller: "+ userId);
+        System.out.println("Controller: "+ userId);
 
          return new ResponseEntity<>(registerService.getAllByUser_id(userId),HttpStatus.OK);
 
@@ -33,7 +34,7 @@ public class PrenotationController {
     @GetMapping(value="/prenotations")
     public ResponseEntity<Integer> countPrenotationByDate(@RequestParam(value = "date" ,required = true) Date date){
 
-        System.out.println("CONTROLLER: date: "+date );
+        System.out.println("ConTROLLER: date: "+date );
 
         return new ResponseEntity<>(registerService.countPrenotationsByDate(date), HttpStatus.OK);
     }
