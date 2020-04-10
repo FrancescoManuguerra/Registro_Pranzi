@@ -1,5 +1,7 @@
 package Elis.College.RegistroPranzi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreType;
 import lombok.*;
 import org.hibernate.annotations.Cascade;
 
@@ -24,10 +26,15 @@ public class User implements Serializable {
     private Long id;
 
     private String name;
+
     private String surname;
+
     private String number;
+
     private String email;
+
     private String password;
+
     private Integer lable_number;
 
     @ManyToOne

@@ -13,12 +13,15 @@ import java.util.List;
 public interface RegisterRepository extends JpaRepository<Register,Long> {
 
     //get prenotations by userId
-    List<Register> findAllByUser_Id(Long userId);
+    //@Query(value = "SELECT * FROM register WHERE user_id = ?1", nativeQuery = true)
+    List<Register> findAllByUser_Id(Long user_id);
 
 
     List<Register> getAllByUser_id(Long userId);
     //get prenotations by date
-    Integer countAllByDate(Date date);
+    Integer countAllByDateAndBreakfast_Id(Date date,Integer id );
+    Integer countAllByDateAndLunch_Id(Date date,Integer id);
+    Integer countAllByDateAndDinner_Id(Date date,Integer id);
 
     //set prenotation
     Register getAllByUser_idAndAndDate(Long userId, Date date);

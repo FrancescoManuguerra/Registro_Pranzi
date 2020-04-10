@@ -11,6 +11,7 @@ import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.Email;
 import java.util.List;
 
 @RestController
@@ -19,12 +20,10 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    //GET ALL
-
     //GET USER FOR AUTHENTICATION
     @CrossOrigin
     @GetMapping(value="/login")
-    public ResponseEntity<User> login(@RequestParam(name = "email",required = false)String email, @RequestParam(name = "password",required = false)String password){
+    public ResponseEntity<User> login(@RequestParam(name = "email",required = false) String email, @RequestParam(name = "password",required = false)String password){
         return new ResponseEntity<User>(userService.login(new LoginKey(email, DigestUtils.sha256Hex(password))), HttpStatus.OK);
 
     }
@@ -40,7 +39,9 @@ public class UserController {
     @CrossOrigin
     @GetMapping(value = "/users")
     public ResponseEntity<List<User>> getUsers(){
+
         return new ResponseEntity<List<User>>(userService.getUsers(),HttpStatus.OK);
+
     }
     //SAVE USER
     @CrossOrigin
@@ -54,8 +55,10 @@ public class UserController {
     @CrossOrigin
     @DeleteMapping(value = "/users")
     public ResponseEntity deleteUser(@RequestParam(value = "id") Long id){
+
         userService.deleteUserById(id);
         return new ResponseEntity (HttpStatus.OK);
+
     }
 
 

@@ -1,8 +1,11 @@
 package Elis.College.RegistroPranzi.service;
 
 
+import Elis.College.RegistroPranzi.model.Presence;
 import Elis.College.RegistroPranzi.model.Register;
+import Elis.College.RegistroPranzi.model.User;
 import Elis.College.RegistroPranzi.repository.RegisterRepository;
+import Elis.College.RegistroPranzi.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,16 +22,21 @@ public class RegisterService {
     //TODO doesn't work
     //get prenotations by userId
     public List<Register> getAllByUser_id(Long userId){
+
         System.out.println("SERVICE : userId: "+userId);
         return registerRepository.findAllByUser_Id(userId);
 
     }
 
     //get prenotations by date
-    public Integer countPrenotationsByDate(Date date){
+    public Presence countPrenotationsByDate(Date date){
         System.out.println("SERVICE: date: "+date);
-
-        return registerRepository.countAllByDate(date);
+        final Integer id=2;
+        Presence presence= Presence.builder().totBreakfast(registerRepository.countAllByDateAndBreakfast_Id(date,id))
+                .totLunch(registerRepository.countAllByDateAndLunch_Id(date,id))
+                .totDinner(registerRepository.countAllByDateAndDinner_Id(date,id))
+                .build();
+        return presence ;
     }
 
     //save prenotation
