@@ -1,21 +1,17 @@
 package Elis.College.RegistroPranzi.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreType;
+import io.swagger.annotations.ApiModel;
 import lombok.*;
-import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 
+@ApiModel
 @Getter
 @Setter
 @AllArgsConstructor
 @Builder
-@NoArgsConstructor
-
-
+@NoArgsConstructor  
 @Table(name = "user")
 @Entity
 public class User implements Serializable {

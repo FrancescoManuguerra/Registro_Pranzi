@@ -1,6 +1,7 @@
 package Elis.College.RegistroPranzi.model;
 
 
+import io.swagger.annotations.ApiModel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+@ApiModel
 @Getter
 @Setter
 @NoArgsConstructor

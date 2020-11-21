@@ -1,6 +1,7 @@
 package Elis.College.RegistroPranzi.model;
 
 
+import io.swagger.annotations.ApiModel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,6 +13,7 @@ import org.springframework.transaction.event.TransactionalEventListener;
 import javax.persistence.*;
 import java.sql.Date;
 
+@ApiModel
 @Getter
 @Setter
 @NoArgsConstructor
