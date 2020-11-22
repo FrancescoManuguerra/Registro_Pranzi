@@ -12,8 +12,6 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @NoArgsConstructor
-
-
 @Table(name = "user")
 @Entity
 public class User implements Serializable {
