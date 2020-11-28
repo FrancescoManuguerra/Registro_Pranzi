@@ -37,20 +37,24 @@ public class RequestValidator {
 
     public static void checkUserId(Long parameter) throws InputParameterException {
         if (parameter <= 0)
-            throw new InputParameterException(HttpStatus.BAD_REQUEST, 404, "ERROR", "User id cannot be <= 0");
+            throw new InputParameterException(HttpStatus.BAD_REQUEST, 400, "ERROR", "User id cannot be <= 0");
     }
 
     public static void checkBody(User user) throws InputParameterException {
 
+        isValidEmailAddress(user.getEmail());
+
         if (user.getName().isEmpty() || user.getNumber().isEmpty() || user.getPassword().isEmpty() || user.getSurname().isEmpty() || user.getLable_number() <= 0)
-            throw new InputParameterException(HttpStatus.BAD_REQUEST, 404, "ERROR", "The body must have all parameter");
+            throw new InputParameterException(HttpStatus.BAD_REQUEST, 400, "ERROR", "The body must have all parameter");
 
     }
 
     public static void checkBody(Register register) throws InputParameterException {
 
-        if (register.getBreakfast() == null || register.getDate() == null || register.getId() == null || register.getLunch() == null || register.getUser() == null)
-            throw new InputParameterException(HttpStatus.BAD_REQUEST, 404, "ERROR", "The body must have all parameter");
+        System.out.println(register.getDate()+" id:"+ register.getId()+ " dinner "+register.getDinner() +" lunch "+ register.getLunch());
+
+        //if (register.getDate() == null || register.getId() == null || register.getDinner() == null || register.getLunch() == null )
+           // throw new InputParameterException(HttpStatus.BAD_REQUEST, 400, "ERROR", "The body must have all parameter");
     }
 
     //To check login parameters
@@ -58,7 +62,6 @@ public class RequestValidator {
         checkParameter(email, "email");
         checkParameter(password, "password");
 
-        isValidEmailAddress(email);
     }
 
     //To check if the email format is correct

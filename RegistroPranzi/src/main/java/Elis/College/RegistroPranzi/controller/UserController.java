@@ -2,12 +2,12 @@ package Elis.College.RegistroPranzi.controller;
 
 import Elis.College.RegistroPranzi.exception.model.Result;
 import Elis.College.RegistroPranzi.exception.model.exceptionimpl.ResponseHeaderFiller;
-import Elis.College.RegistroPranzi.model.LoginKey;
-import Elis.College.RegistroPranzi.model.User;
-import Elis.College.RegistroPranzi.model.UserResponse;
-import Elis.College.RegistroPranzi.model.UsersResponse;
+import Elis.College.RegistroPranzi.model.*;
 import Elis.College.RegistroPranzi.service.UserService;
 import Elis.College.RegistroPranzi.utility.RequestValidator;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,14 +16,15 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import javax.annotation.PostConstruct;
 import java.sql.Timestamp;
 import java.util.UUID;
 
 @RestController
+@RequestMapping("/api")
 public class UserController {
 
     @Autowired
@@ -32,6 +33,15 @@ public class UserController {
     private final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     //GET USER FOR AUTHENTICATION
+    @ApiOperation(value = "User authentication")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "SUCCESS", response = UserResponse.class),
+            @ApiResponse(code = 400 , message = "BAD REQUEST", response = Result.class),
+            @ApiResponse(code = 401, message = "UNAUTHORIZED!", response = Result.class),
+            @ApiResponse(code = 403, message = "FORBIDDEN!", response = Result.class),
+            @ApiResponse(code = 404, message =  "NOT FOUND", response = Result.class),
+            @ApiResponse(code = 500 , message = "INTERNAL SERVER ERROR", response = Result.class)
+    })
     @CrossOrigin
     @GetMapping(value = "/login")
     public ResponseEntity<UserResponse> login(@RequestParam(name = "email", required = false) String email, @RequestParam(name = "password", required = false) String password) throws Exception {
@@ -52,7 +62,17 @@ public class UserController {
         return new ResponseEntity<>(response,headers, HttpStatus.OK);
     }
 
+
     //GET USER BY ID
+    @ApiOperation(value = "Get user by user id")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "SUCCESS", response = UserResponse.class),
+            @ApiResponse(code = 400 , message = "BAD REQUEST", response = Result.class),
+            @ApiResponse(code = 401, message = "UNAUTHORIZED!", response = Result.class),
+            @ApiResponse(code = 403, message = "FORBIDDEN!", response = Result.class),
+            @ApiResponse(code = 404, message =  "NOT FOUND", response = Result.class),
+            @ApiResponse(code = 500 , message = "INTERNAL SERVER ERROR", response = Result.class)
+    })
     @CrossOrigin
     @GetMapping(value = "users/{userid}")
     public ResponseEntity<UserResponse> getUser(@PathVariable(name = "userid") Long id) throws Exception {
@@ -75,6 +95,15 @@ public class UserController {
     }
 
     //GET USERS
+    @ApiOperation(value = "Get all users")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "SUCCESS", response = UserResponse.class),
+            @ApiResponse(code = 400 , message = "BAD REQUEST", response = Result.class),
+            @ApiResponse(code = 401, message = "UNAUTHORIZED!", response = Result.class),
+            @ApiResponse(code = 403, message = "FORBIDDEN!", response = Result.class),
+            @ApiResponse(code = 404, message =  "NOT FOUND", response = Result.class),
+            @ApiResponse(code = 500 , message = "INTERNAL SERVER ERROR", response = Result.class)
+    })
     @CrossOrigin
     @GetMapping(value = "/users")
     public ResponseEntity<UsersResponse> getUsers() {
@@ -93,7 +122,16 @@ public class UserController {
         return new ResponseEntity<>(response,headers, HttpStatus.OK);
     }
 
-    //SAVE USER
+    //REGISTRATION
+    @ApiOperation(value = "Save an user")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "SUCCESS", response = UserResponse.class),
+            @ApiResponse(code = 400 , message = "BAD REQUEST", response = Result.class),
+            @ApiResponse(code = 401, message = "UNAUTHORIZED!", response = Result.class),
+            @ApiResponse(code = 403, message = "FORBIDDEN!", response = Result.class),
+            @ApiResponse(code = 404, message =  "NOT FOUND", response = Result.class),
+            @ApiResponse(code = 500 , message = "INTERNAL SERVER ERROR", response = Result.class)
+    })
     @CrossOrigin
     @PostMapping(value = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserResponse> insertUser(@RequestBody(required = true) User user) throws Exception {
@@ -122,6 +160,15 @@ public class UserController {
     }
 
     //DELETE USER
+    @ApiOperation(value = "Delete an user")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "SUCCESS", response = Result.class),
+            @ApiResponse(code = 400 , message = "BAD REQUEST", response = Result.class),
+            @ApiResponse(code = 401, message = "UNAUTHORIZED!", response = Result.class),
+            @ApiResponse(code = 403, message = "FORBIDDEN!", response = Result.class),
+            @ApiResponse(code = 404, message =  "NOT FOUND", response = Result.class),
+            @ApiResponse(code = 500 , message = "INTERNAL SERVER ERROR", response = Result.class)
+    })
     @CrossOrigin
     @DeleteMapping(value = "/users")
     public ResponseEntity<Result> deleteUser(@RequestParam(value = "id") Long id) throws Exception{
