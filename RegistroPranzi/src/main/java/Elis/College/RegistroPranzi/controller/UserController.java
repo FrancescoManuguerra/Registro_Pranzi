@@ -2,7 +2,10 @@ package Elis.College.RegistroPranzi.controller;
 
 import Elis.College.RegistroPranzi.exception.model.Result;
 import Elis.College.RegistroPranzi.exception.model.exceptionimpl.ResponseHeaderFiller;
-import Elis.College.RegistroPranzi.model.*;
+import Elis.College.RegistroPranzi.model.LoginKey;
+import Elis.College.RegistroPranzi.model.User;
+import Elis.College.RegistroPranzi.model.UserResponse;
+import Elis.College.RegistroPranzi.model.UsersResponse;
 import Elis.College.RegistroPranzi.service.UserService;
 import Elis.College.RegistroPranzi.utility.RequestValidator;
 import io.swagger.annotations.ApiOperation;
@@ -17,7 +20,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import javax.annotation.PostConstruct;
 import java.sql.Timestamp;
@@ -134,7 +136,7 @@ public class UserController {
     })
     @CrossOrigin
     @PostMapping(value = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<UserResponse> insertUser(@RequestBody(required = true) User user) throws Exception {
+    public ResponseEntity<UserResponse> insertUser(@RequestBody User user) throws Exception {
 
         String logID = generateLogID("POST an user");
         Timestamp startTime = startLog(logID);
