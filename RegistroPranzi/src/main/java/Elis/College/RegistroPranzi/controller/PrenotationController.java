@@ -19,7 +19,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import javax.annotation.PostConstruct;
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -118,7 +117,7 @@ public class PrenotationController {
     @GetMapping(value = "/monthlyprenotations")
     public ResponseEntity<NumberOfPrenotationResponse> countPrenotationByMonth(@RequestParam(value = "date") String date) throws Exception {
 
-        String logID = generateLogID("GET number of prenotation by month");
+        String logID = generateLogID("GET number of prenotations by month");
         Timestamp startTime = startLog(logID);
 
         RequestValidator.checkParameter(date, "date");
