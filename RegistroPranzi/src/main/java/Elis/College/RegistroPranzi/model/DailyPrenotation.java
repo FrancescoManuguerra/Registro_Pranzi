@@ -5,6 +5,7 @@ public class DailyPrenotation {
     Integer lunchvalue;
     Integer dinnervalue;
 
+
     public DailyPrenotation(Integer lunchvalue, Integer dinnervalue) {
         this.lunchvalue = lunchvalue;
         this.dinnervalue = dinnervalue;

@@ -33,8 +33,8 @@ public class UserService {
     //GET ALL USERS
     public List<User> getUsers(String logId) {
 
-        List<User> userList= userRepository.findAll();
-        logger.info(logId+ " Got result from db");
+        List<User> userList = userRepository.findAll();
+        logger.info(logId + " Got result from db");
         return userList;
     }
 
@@ -65,7 +65,8 @@ public class UserService {
 
         userRepository.save(user);
         logger.info(logId + " Post repo done");
-        User checkuser = userRepository.getByEmailAndPassword(user.getEmail(), user.getPassword());
+
+        User checkuser = userRepository.getById(user.getId());
         logger.info(logId + " Got result from db");
         if (checkuser == null)
             throw new InternalServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR, 500, "User", "The server failed to perform the operation");

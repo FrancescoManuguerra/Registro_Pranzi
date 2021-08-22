@@ -186,6 +186,12 @@ public class UserController {
         return new ResponseEntity<>(new Result(0,"Operation completed successfully"), HttpStatus.OK);
     }
 
+    @GetMapping(value = "/status")
+    public ResponseEntity<Result> getStatus(){
+
+        return ResponseEntity.ok(new Result(0,"API RegistroPranzi is running!"));
+    }
+
     @PostConstruct
     private void imAlive(){
         logger.info(" Prenotation Controller started");

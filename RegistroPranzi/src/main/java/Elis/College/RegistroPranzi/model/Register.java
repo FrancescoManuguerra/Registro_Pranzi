@@ -28,7 +28,6 @@ public class Register {
     @Column(name="id")
     private Long id;
 
-    @JsonIgnore
     @ManyToOne
     private User user;
 
@@ -42,5 +41,11 @@ public class Register {
     @DateTimeFormat(pattern = "yyyy-MM-dd", style = "yyyy-MM-dd", iso = DateTimeFormat.ISO.DATE)
     @Column(name = "date")
     private Date date;
+
+    @Column(name = "guest_lunch_number")
+    private Integer guestLunchNumber;
+
+    @Column(name = "guest_dinner_number")
+    private Integer guestDinnerNumber;
 
 }
